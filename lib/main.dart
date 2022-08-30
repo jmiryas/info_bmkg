@@ -24,24 +24,34 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.light,
+        primaryColor: const Color(0xFF488B8F),
         scaffoldBackgroundColor: const Color(0xFFFAF9F9),
+        appBarTheme: const AppBarTheme(
+          color: Color(0xFF488B8F),
+        ),
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           backgroundColor: Color(0xFF488B8F),
           selectedIconTheme: IconThemeData(
-            color: Color(0xFFADD2C9),
+            color: Color.fromARGB(255, 217, 248, 241),
           ),
-          selectedItemColor: Color(0xFFADD2C9),
+          selectedItemColor: Color.fromARGB(255, 217, 248, 241),
           unselectedIconTheme: IconThemeData(
-            color: Color(0xFF5EA3A3),
+            color: Color.fromARGB(255, 157, 206, 206),
           ),
-          unselectedItemColor: Color(0xFF5EA3A3),
+          unselectedItemColor: Color.fromARGB(255, 157, 206, 206),
+        ),
+        drawerTheme: const DrawerThemeData(
+          backgroundColor: Color(0xFF488B8F),
         ),
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
-        scaffoldBackgroundColor: const Color(0xFF222831),
+        scaffoldBackgroundColor: const Color(0xFF393E46),
+        appBarTheme: const AppBarTheme(
+          color: Color(0xFF222831),
+        ),
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          backgroundColor: Color(0xFF393E46),
+          backgroundColor: Color(0xFF222831),
           selectedIconTheme: IconThemeData(
             color: Color(0xFFFFD369),
           ),
@@ -50,6 +60,9 @@ class MyApp extends StatelessWidget {
             color: Color(0xFFEEEEEE),
           ),
           unselectedItemColor: Color(0xFFEEEEEE),
+        ),
+        drawerTheme: const DrawerThemeData(
+          backgroundColor: Color(0xFF222831),
         ),
       ),
       themeMode: ThemeMode.dark,

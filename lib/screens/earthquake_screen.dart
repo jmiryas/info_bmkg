@@ -5,6 +5,11 @@ class EarthquakeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return const Padding(
+      padding: EdgeInsets.all(20.0),
+      child: Center(
+        child: Text("Earthquake"),
+      ),
+    );
   }
 }
