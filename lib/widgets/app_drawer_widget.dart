@@ -28,8 +28,8 @@ class AppDrawerWidget extends StatelessWidget {
                       title: "Tentang Aplikasi",
                       children: [
                         const Text(
-                          "Aplikasi ini dibuat oleh Rizky Ramadhan untuk menampilkan informasi cuaca dan gempa dengan menggunakan Flutter. Data yang digunakan bersumber dari website Data Terbuka BMKG.",
-                          textAlign: TextAlign.left,
+                          "Aplikasi ini dibuat dengan menggunakan Flutter untuk menampilkan informasi mengenai cuaca dan gempa di Indonesia. Data yang digunakan berasal dari website Data Terbuka BMKG",
+                          textAlign: TextAlign.justify,
                         ),
                         const SizedBox(
                           height: 10.0,
