@@ -24,6 +24,18 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.light,
+        scaffoldBackgroundColor: const Color(0xFFFAF9F9),
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          backgroundColor: Color(0xFF488B8F),
+          selectedIconTheme: IconThemeData(
+            color: Color(0xFFADD2C9),
+          ),
+          selectedItemColor: Color(0xFFADD2C9),
+          unselectedIconTheme: IconThemeData(
+            color: Color(0xFF5EA3A3),
+          ),
+          unselectedItemColor: Color(0xFF5EA3A3),
+        ),
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
