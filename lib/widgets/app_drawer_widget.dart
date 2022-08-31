@@ -27,6 +27,14 @@ class AppDrawerWidget extends StatelessWidget {
                     return CustomAlertDialogWidget(
                       title: "Tentang Aplikasi",
                       children: [
+                        Image.asset(
+                          "assets/icons/earthquake.png",
+                          width: 60.0,
+                          height: 60.0,
+                        ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
                         const Text(
                           "Aplikasi ini dibuat dengan menggunakan Flutter untuk menampilkan informasi mengenai cuaca dan gempa di Indonesia. Data yang digunakan berasal dari website Data Terbuka BMKG",
                           textAlign: TextAlign.justify,

@@ -28,19 +28,15 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Earthquake"),
-        centerTitle: true,
-      ),
       body: _screens[_selectedNavbar],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.timeline),
+            icon: Icon(Icons.sunny),
             label: "Cuaca",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.question_mark_rounded),
+            icon: Icon(Icons.waves),
             label: "Gempa",
           ),
         ],

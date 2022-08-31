@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:info_bmkg/locators/locator.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 // import '../themes/theme_data_dark.dart';
 // import '../themes/theme_data_light.dart';
 import '../providers/theme_provider.dart';
 import '../screens/main_menu_screen.dart';
-import '../providers/earthquake_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,14 +17,13 @@ Future<void> main() async {
     DeviceOrientation.portraitDown,
   ]);
 
+  initLocator();
+
   await initializeDateFormatting("id_ID").then((value) {
     return runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(
           create: (context) => ThemeProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => EarthquakeProvider(),
         ),
       ],
       child: const MyApp(),

@@ -8,7 +8,7 @@ class EarthquakeModel {
   final String magnitude;
   final String kedalaman;
   final String wilayah;
-  final String potensi;
+  String? potensi;
   String? dirasakan;
   String? shakemap;
 
@@ -22,23 +22,25 @@ class EarthquakeModel {
     required this.magnitude,
     required this.kedalaman,
     required this.wilayah,
-    required this.potensi,
+    this.potensi = "",
     this.dirasakan = "",
     this.shakemap = "",
   });
 
   factory EarthquakeModel.fromJson(Map<String, dynamic> json) {
     return EarthquakeModel(
-      tanggal: json["tanggal"],
-      jam: json["jam"],
-      dateTime: json["dateTime"],
-      coordinates: json["coordinates"],
-      lintang: json["lintang"],
-      bujur: json["bujur"],
-      magnitude: json["magnitude"],
-      kedalaman: json["kedalaman"],
-      wilayah: json["wilayah"],
-      potensi: json["potensi"],
+      tanggal: json["Tanggal"],
+      jam: json["Jam"],
+      dateTime: json["DateTime"],
+      coordinates: json["Coordinates"],
+      lintang: json["Lintang"],
+      bujur: json["Bujur"],
+      magnitude: json["Magnitude"],
+      kedalaman: json["Kedalaman"],
+      wilayah: json["Wilayah"],
+      potensi: json["Potensi"] ?? "",
+      dirasakan: json["Dirasakan"] ?? "",
+      shakemap: json["Shakemap"] ?? "",
     );
   }
 
