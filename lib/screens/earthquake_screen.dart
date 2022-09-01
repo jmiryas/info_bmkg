@@ -96,6 +96,7 @@ class _EarthquakeScreenState extends State<EarthquakeScreen> {
           builder: ((context, AsyncSnapshot<List<EarthquakeModel>> snapshot) {
             if (snapshot.hasData) {
               return ListView(
+                physics: const BouncingScrollPhysics(),
                 children: snapshot.data!.map((earthquake) {
                   return Card(
                     child: ExpansionTile(

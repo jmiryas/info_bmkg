@@ -75,14 +75,19 @@ class EarthquakeDetailGridWidget extends StatelessWidget {
                   return CustomAlertDialogWidget(
                     title: "PETA",
                     children: [
-                      CachedNetworkImage(
-                        imageUrl: shakeMapUrl,
-                        fit: BoxFit.cover,
-                        placeholder: (context, url) =>
-                            const CircularProgressIndicator(),
-                        errorWidget: (context, url, error) =>
-                            const Text("Maaf. gambar tidak ditemukan"),
-                      ),
+                      InteractiveViewer(
+                        clipBehavior: Clip.none,
+                        minScale: 1,
+                        maxScale: 4,
+                        child: CachedNetworkImage(
+                          imageUrl: shakeMapUrl,
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) =>
+                              const CircularProgressIndicator(),
+                          errorWidget: (context, url, error) =>
+                              const Text("Maaf. gambar tidak ditemukan"),
+                        ),
+                      )
                     ],
                   );
                 });
