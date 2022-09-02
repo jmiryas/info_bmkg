@@ -1,70 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 
+// import '../models/region_model.dart';
 import '../models/region_model.dart';
+import '../services/weather_service.dart';
 import '../widgets/app_drawer_widget.dart';
 import '../models/region_endpoint_model.dart';
+import '../screens/region_weather_screen.dart';
 
-class WeatherScreen extends StatelessWidget {
+class WeatherScreen extends StatefulWidget {
   const WeatherScreen({Key? key}) : super(key: key);
 
   @override
+  State<WeatherScreen> createState() => _WeatherScreenState();
+}
+
+class _WeatherScreenState extends State<WeatherScreen> {
+  RegionEndpointModel _selectedRegionEndpoint =
+      RegionEndpointModel(label: "Indonesia", endpoint: "indonesia");
+
+  late Future<List<RegionModel>> _weathers;
+
+  @override
+  void initState() {
+    super.initState();
+
+    fetchWeather();
+  }
+
+  void fetchWeather() {
+    _weathers =
+        WeatherService.getProvinceWeather(_selectedRegionEndpoint.endpoint);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final List<RegionModel> regionList = [
-      RegionModel(
-        id: "501212",
-        latitude: "-6.90992",
-        longitude: "107.64691",
-        coordinate: "107.64691 -6.90992",
-        type: "land",
-        region: "",
-        level: "1",
-        description: "Bandung",
-        domain: "Jawa Barat",
-        tags: "",
-      ),
-      RegionModel(
-        id: "501213",
-        latitude: "-6.90992",
-        longitude: "107.64691",
-        coordinate: "107.64691 -6.90992",
-        type: "land",
-        region: "",
-        level: "1",
-        description: "Banjar",
-        domain: "Jawa Barat",
-        tags: "",
-      ),
-      RegionModel(
-        id: "501214",
-        latitude: "-6.90992",
-        longitude: "107.64691",
-        coordinate: "107.64691 -6.90992",
-        type: "land",
-        region: "",
-        level: "1",
-        description: "Bekasi",
-        domain: "Jawa Barat",
-        tags: "",
-      ),
-    ];
-
-    // int crossAxisCount = 2;
-
-    // double width = MediaQuery.of(context).size.width;
-
-    // if (width < 300) {
-    //   crossAxisCount = 1;
-    // } else if (width < 576) {
-    //   crossAxisCount = 2;
-    // } else if (width >= 576 && width < 768) {
-    //   crossAxisCount = 3;
-    // } else if (width >= 768 && width < 992) {
-    //   crossAxisCount = 4;
-    // } else {
-    //   crossAxisCount = 6;
-    // }
-
     return Scaffold(
       appBar: AppBar(
         title: const Text("Cuaca"),
@@ -75,15 +45,70 @@ class WeatherScreen extends StatelessWidget {
         child: SingleChildScrollView(
             child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             DropdownSearch<RegionEndpointModel>(
               items: [
                 RegionEndpointModel(label: "Aceh", endpoint: "aceh"),
+                RegionEndpointModel(label: "Bali", endpoint: "bali"),
+                RegionEndpointModel(label: "Banten", endpoint: "banten"),
+                RegionEndpointModel(label: "Bengkulu", endpoint: "bengkulu"),
+                RegionEndpointModel(
+                    label: "DI Yogyakarta", endpoint: "di-yogyakarta"),
+                RegionEndpointModel(
+                    label: "DKI Jakarta", endpoint: "dki-jakarta"),
+                RegionEndpointModel(label: "Gorontalo", endpoint: "gorontalo"),
+                RegionEndpointModel(label: "Jambi", endpoint: "jambi"),
                 RegionEndpointModel(
                     label: "Jawa Barat", endpoint: "jawa-barat"),
                 RegionEndpointModel(
                     label: "Jawa Tengah", endpoint: "jawa-tengah"),
+                RegionEndpointModel(
+                    label: "Jawa Timur", endpoint: "jawa-timur"),
+                RegionEndpointModel(
+                    label: "Kalimantan Barat", endpoint: "kalimantan-barat"),
+                RegionEndpointModel(
+                    label: "Kalimantan Selatan",
+                    endpoint: "kalimantan-selatan"),
+                RegionEndpointModel(
+                    label: "Kalimantan Tengah", endpoint: "kalimantan-tengah"),
+                RegionEndpointModel(
+                    label: "Kalimantan Timur", endpoint: "kalimantan-timur"),
+                RegionEndpointModel(
+                    label: "Kalimantan Utara", endpoint: "kalimantan-utara"),
+                RegionEndpointModel(
+                    label: "Kep. Bangka Belitung", endpoint: "bangka-belitung"),
+                RegionEndpointModel(
+                    label: "Kep. Riau", endpoint: "kepulauan-riau"),
+                RegionEndpointModel(label: "Lampung", endpoint: "lampung"),
+                RegionEndpointModel(label: "Maluku", endpoint: "maluku"),
+                RegionEndpointModel(
+                    label: "Maluku Utara", endpoint: "maluku-utara"),
+                RegionEndpointModel(
+                    label: "Nusa Tenggara Barat",
+                    endpoint: "nusa-tenggara-barat"),
+                RegionEndpointModel(
+                    label: "Nusa Tenggara Timur",
+                    endpoint: "nusa-tenggara-timur"),
+                RegionEndpointModel(label: "Papua", endpoint: "papua"),
+                RegionEndpointModel(
+                    label: "Papua Barat", endpoint: "papua-barat"),
+                RegionEndpointModel(label: "Riau", endpoint: "riau"),
+                RegionEndpointModel(
+                    label: "Sulawesi Barat", endpoint: "sulawesi-barat"),
+                RegionEndpointModel(
+                    label: "Sulawesi Selatan", endpoint: "sulawesi-selatan"),
+                RegionEndpointModel(
+                    label: "Sulawesi Tenggara", endpoint: "sulawesi-tenggara"),
+                RegionEndpointModel(
+                    label: "Sulawesi Utara", endpoint: "sulawesi-utara"),
+                RegionEndpointModel(
+                    label: "Sumatera Barat", endpoint: "sumatera-barat"),
+                RegionEndpointModel(
+                    label: "Sumatera Selatan", endpoint: "sumatera-selatan"),
+                RegionEndpointModel(
+                    label: "Sumatera Utara", endpoint: "sumatera-utara"),
+                RegionEndpointModel(label: "Indonesia", endpoint: "indonesia"),
               ],
               dropdownDecoratorProps: const DropDownDecoratorProps(
                 dropdownSearchDecoration: InputDecoration(
@@ -100,30 +125,63 @@ class WeatherScreen extends StatelessWidget {
                 ),
               ),
               itemAsString: ((item) => item.label),
-              onChanged: print,
-              selectedItem:
-                  RegionEndpointModel(label: "Aceh", endpoint: "aceh"),
+              onChanged: ((value) {
+                setState(() {
+                  _selectedRegionEndpoint = value!;
+
+                  fetchWeather();
+                });
+              }),
+              selectedItem: _selectedRegionEndpoint,
             ),
             const SizedBox(
               height: 20.0,
             ),
-            Wrap(
-              spacing: 20.0,
-              runSpacing: 20.0,
-              alignment: WrapAlignment.start,
-              runAlignment: WrapAlignment.center,
-              children: regionList.map((region) {
-                return SizedBox(
-                  width: 135.0,
-                  height: 135.0,
-                  child: Card(
-                    child: ListTile(
-                      title: Text(region.description),
-                      subtitle: Text(region.domain),
-                    ),
-                  ),
+            FutureBuilder(
+              future: _weathers,
+              builder: ((context, AsyncSnapshot<List<RegionModel>> snapshot) {
+                if (snapshot.hasData) {
+                  return Wrap(
+                    spacing: 20.0,
+                    runSpacing: 20.0,
+                    alignment: WrapAlignment.start,
+                    runAlignment: WrapAlignment.center,
+                    children: snapshot.data!.map((region) {
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: ((context) =>
+                                  RegionWeatherScreen(region: region)),
+                            ),
+                          );
+                        },
+                        child: Card(
+                          child: SizedBox(
+                            width: 135.0,
+                            height: 135.0,
+                            child: Center(
+                              child: ListTile(
+                                title: Text(region.domain),
+                                subtitle: Text(region.description),
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  );
+                } else if (snapshot.hasError) {
+                  return const Center(
+                    child: Text("Maaf, terjadi error"),
+                  );
+                }
+
+                return const Center(
+                  child: CircularProgressIndicator(),
                 );
-              }).toList(),
+              }),
             )
           ],
         )),

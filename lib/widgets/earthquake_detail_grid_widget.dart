@@ -85,7 +85,7 @@ class EarthquakeDetailGridWidget extends StatelessWidget {
                           placeholder: (context, url) =>
                               const CircularProgressIndicator(),
                           errorWidget: (context, url, error) =>
-                              const Text("Maaf. gambar tidak ditemukan"),
+                              const Text("Maaf, gambar tidak ditemukan"),
                         ),
                       )
                     ],
