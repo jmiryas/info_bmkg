@@ -1,3 +1,5 @@
+import '../models/param_model.dart';
+
 class RegionModel {
   final String id;
   final String latitude;
@@ -9,6 +11,7 @@ class RegionModel {
   final String description;
   final String domain;
   final String tags;
+  final List<ParamModel> params;
 
   RegionModel({
     required this.id,
@@ -21,9 +24,20 @@ class RegionModel {
     required this.description,
     required this.domain,
     required this.tags,
+    required this.params,
   });
 
   factory RegionModel.fromJson(Map<String, dynamic> json) {
+    List<ParamModel> getListOfParams(List<dynamic> paramsJson) {
+      List<ParamModel> params = [];
+
+      for (var element in paramsJson) {
+        params.add(ParamModel.fromJson(element));
+      }
+
+      return params;
+    }
+
     return RegionModel(
       id: json["id"] ?? "",
       latitude: json["latitude"] ?? "",
@@ -35,6 +49,7 @@ class RegionModel {
       description: json["description"] ?? "",
       domain: json["domain"] ?? "",
       tags: json["tags"] ?? "",
+      params: getListOfParams(json["params"]),
     );
   }
 
