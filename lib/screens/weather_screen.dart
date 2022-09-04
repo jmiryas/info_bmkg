@@ -19,7 +19,9 @@ class _WeatherScreenState extends State<WeatherScreen> {
   RegionEndpointModel _selectedRegionEndpoint =
       RegionEndpointModel(label: "Indonesia", endpoint: "indonesia");
 
-  late Future<List<RegionModel>> _weathers;
+  List<RegionModel> _weathers = [];
+
+  bool _isLoading = true;
 
   @override
   void initState() {
@@ -28,9 +30,14 @@ class _WeatherScreenState extends State<WeatherScreen> {
     fetchWeather();
   }
 
-  void fetchWeather() {
-    _weathers =
-        WeatherService.getProvinceWeather(_selectedRegionEndpoint.endpoint);
+  Future<void> fetchWeather() async {
+    _weathers = await WeatherService.getProvinceWeather(
+            _selectedRegionEndpoint.endpoint)
+        .whenComplete(() {
+      setState(() {
+        _isLoading = !_isLoading;
+      });
+    });
   }
 
   @override
@@ -137,29 +144,30 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     ),
                   ),
                   itemAsString: ((item) => item.label),
-                  onChanged: ((value) {
+                  onChanged: ((value) async {
                     setState(() {
-                      _selectedRegionEndpoint = value!;
+                      _isLoading = !_isLoading;
 
-                      fetchWeather();
+                      _selectedRegionEndpoint = value!;
                     });
+
+                    await fetchWeather();
                   }),
                   selectedItem: _selectedRegionEndpoint,
                 ),
                 const SizedBox(
                   height: 20.0,
                 ),
-                FutureBuilder(
-                  future: _weathers,
-                  builder:
-                      ((context, AsyncSnapshot<List<RegionModel>> snapshot) {
-                    if (snapshot.hasData) {
-                      return Wrap(
+                _isLoading
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : Wrap(
                         spacing: 20.0,
                         runSpacing: 20.0,
                         alignment: WrapAlignment.start,
                         runAlignment: WrapAlignment.center,
-                        children: snapshot.data!.map((region) {
+                        children: _weathers.map((region) {
                           return GestureDetector(
                             onTap: () {
                               Navigator.push(
@@ -184,18 +192,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                             ),
                           );
                         }).toList(),
-                      );
-                    } else if (snapshot.hasError) {
-                      return const Center(
-                        child: Text("Maaf, terjadi error"),
-                      );
-                    }
-
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }),
-                )
+                      ),
               ],
             )),
       ),

@@ -152,109 +152,119 @@ class RegionWeatherScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SliverList(
-              delegate: SliverChildListDelegate(
-                List.generate(region.params.length, (index) {
-                  ParamModel param = region.params[index];
+            region.params!.isNotEmpty
+                ? SliverList(
+                    delegate: SliverChildListDelegate(
+                      List.generate(region.params!.length, (index) {
+                        ParamModel param = region.params![index];
 
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      ListTile(
-                        title: Text(param.description),
-                        subtitle: Text(param.type),
-                      ),
-                      Wrap(
-                        alignment: WrapAlignment.start,
-                        runAlignment: WrapAlignment.center,
-                        spacing: 20.0,
-                        runSpacing: 20.0,
-                        children: param.times.map((time) {
-                          return SizedBox(
-                            width: 140.0,
-                            // height: 200.0,
-                            child: Card(
-                              child: Padding(
-                                padding: const EdgeInsets.all(0.0),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    time.value.isNotEmpty
-                                        ? ListTile(
-                                            title: const Text("Value"),
-                                            subtitle: Text(time.value),
-                                          )
-                                        : const SizedBox(),
-                                    time.celcius.isNotEmpty &&
-                                            time.fahrenheit.isNotEmpty
-                                        ? ListTile(
-                                            title: const Text("Suhu"),
-                                            subtitle: Text(
-                                                "${time.celcius} / ${time.fahrenheit}"),
-                                          )
-                                        : const SizedBox(),
-                                    time.name.isNotEmpty
-                                        ? ListTile(
-                                            title: const Text("Kondisi"),
-                                            subtitle: Text(time.name),
-                                          )
-                                        : const SizedBox(),
-                                    time.deg.isNotEmpty
-                                        ? ListTile(
-                                            title: const Text("DEG"),
-                                            subtitle: Text(time.deg),
-                                          )
-                                        : const SizedBox(),
-                                    time.card.isNotEmpty
-                                        ? ListTile(
-                                            title: const Text("Arah Angin"),
-                                            subtitle: Text(time.card),
-                                          )
-                                        : const SizedBox(),
-                                    time.sexa.isNotEmpty
-                                        ? ListTile(
-                                            title: const Text("SEXA"),
-                                            subtitle: Text(time.sexa),
-                                          )
-                                        : const SizedBox(),
-                                    time.kt.isNotEmpty
-                                        ? ListTile(
-                                            title: const Text("KT"),
-                                            subtitle: Text(time.kt),
-                                          )
-                                        : const SizedBox(),
-                                    time.mph.isNotEmpty
-                                        ? ListTile(
-                                            title: const Text("MPH"),
-                                            subtitle: Text(time.mph),
-                                          )
-                                        : const SizedBox(),
-                                    time.kph.isNotEmpty
-                                        ? ListTile(
-                                            title: const Text("KPH"),
-                                            subtitle: Text(time.kph),
-                                          )
-                                        : const SizedBox(),
-                                    time.ms.isNotEmpty
-                                        ? ListTile(
-                                            title: const Text("MS"),
-                                            subtitle: Text(time.ms),
-                                          )
-                                        : const SizedBox(),
-                                  ],
-                                ),
-                              ),
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            ListTile(
+                              title: Text(param.description),
+                              subtitle: Text(param.type),
                             ),
-                          );
-                        }).toList(),
-                      ),
-                    ],
-                  );
-                }),
-              ),
-            )
+                            Wrap(
+                              alignment: WrapAlignment.start,
+                              runAlignment: WrapAlignment.center,
+                              spacing: 20.0,
+                              runSpacing: 20.0,
+                              children: param.times.map((time) {
+                                return SizedBox(
+                                  width: 140.0,
+                                  // height: 200.0,
+                                  child: Card(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(0.0),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          time.value.isNotEmpty
+                                              ? ListTile(
+                                                  title: const Text("Value"),
+                                                  subtitle: Text(time.value),
+                                                )
+                                              : const SizedBox(),
+                                          time.celcius.isNotEmpty &&
+                                                  time.fahrenheit.isNotEmpty
+                                              ? ListTile(
+                                                  title: const Text("Suhu"),
+                                                  subtitle: Text(
+                                                      "${time.celcius} / ${time.fahrenheit}"),
+                                                )
+                                              : const SizedBox(),
+                                          time.name.isNotEmpty
+                                              ? ListTile(
+                                                  title: const Text("Kondisi"),
+                                                  subtitle: Text(time.name),
+                                                )
+                                              : const SizedBox(),
+                                          time.deg.isNotEmpty
+                                              ? ListTile(
+                                                  title: const Text("DEG"),
+                                                  subtitle: Text(time.deg),
+                                                )
+                                              : const SizedBox(),
+                                          time.card.isNotEmpty
+                                              ? ListTile(
+                                                  title:
+                                                      const Text("Arah Angin"),
+                                                  subtitle: Text(time.card),
+                                                )
+                                              : const SizedBox(),
+                                          time.sexa.isNotEmpty
+                                              ? ListTile(
+                                                  title: const Text("SEXA"),
+                                                  subtitle: Text(time.sexa),
+                                                )
+                                              : const SizedBox(),
+                                          time.kt.isNotEmpty
+                                              ? ListTile(
+                                                  title: const Text("KT"),
+                                                  subtitle: Text(time.kt),
+                                                )
+                                              : const SizedBox(),
+                                          time.mph.isNotEmpty
+                                              ? ListTile(
+                                                  title: const Text("MPH"),
+                                                  subtitle: Text(time.mph),
+                                                )
+                                              : const SizedBox(),
+                                          time.kph.isNotEmpty
+                                              ? ListTile(
+                                                  title: const Text("KPH"),
+                                                  subtitle: Text(time.kph),
+                                                )
+                                              : const SizedBox(),
+                                          time.ms.isNotEmpty
+                                              ? ListTile(
+                                                  title: const Text("MS"),
+                                                  subtitle: Text(time.ms),
+                                                )
+                                              : const SizedBox(),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }).toList(),
+                            ),
+                          ],
+                        );
+                      }),
+                    ),
+                  )
+                : const SliverToBoxAdapter(
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 20.0),
+                      child: Text("Tidak ada informasi cuaca ..."),
+                    ),
+                  ),
           ],
         ),
       ),

@@ -7,8 +7,11 @@ import '../constants/api_constant.dart';
 class WeatherService {
   static Future<List<RegionModel>> getProvinceWeather(
       String provinceEndpoint) async {
-    final response =
-        await http.get(Uri.parse("${ApiConstant.weatherUrl}$provinceEndpoint"));
+    final response = await http
+        .get(Uri.parse("${ApiConstant.weatherUrl}$provinceEndpoint"))
+        .timeout(
+          const Duration(seconds: 360),
+        );
 
     if (response.statusCode == 200) {
       List<RegionModel> weathers = [];
