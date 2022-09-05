@@ -37,7 +37,7 @@ class AppDrawerWidget extends StatelessWidget {
                         ),
                         const Text(
                           "Aplikasi ini dibuat dengan menggunakan Flutter untuk menampilkan informasi mengenai cuaca dan gempa di Indonesia. Data yang digunakan berasal dari website Data Terbuka BMKG",
-                          textAlign: TextAlign.justify,
+                          textAlign: TextAlign.left,
                         ),
                         const SizedBox(
                           height: 10.0,
