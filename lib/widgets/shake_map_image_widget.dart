@@ -32,7 +32,7 @@ class ShakeMapImageWidget extends StatelessWidget {
             ),
           ),
           errorWidget: (context, url, error) =>
-              const Text("Maaf, gambar tidak ditemukan"),
+              const Center(child: Text("Maaf, gambar tidak ditemukan"),),
         ),
       ),
     );
