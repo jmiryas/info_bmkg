@@ -4,7 +4,7 @@ import '../enums/earthquake_enum.dart';
 import '../models/earthquake_model.dart';
 import '../widgets/app_drawer_widget.dart';
 import '../services/earthquake_service.dart';
-import '../widgets/earthquake_detail_grid_widget.dart';
+import '../widgets/earthquake_grid_widget.dart';
 
 class EarthquakeScreen extends StatefulWidget {
   const EarthquakeScreen({Key? key}) : super(key: key);
@@ -14,9 +14,11 @@ class EarthquakeScreen extends StatefulWidget {
 }
 
 class _EarthquakeScreenState extends State<EarthquakeScreen> {
+  bool _isLoading = true;
+
   EarthquakeEnum _selectedEarthquakeEnum = EarthquakeEnum.gempaTerbaru;
 
-  late Future<List<EarthquakeModel>> _earthquakes;
+  List<EarthquakeModel> _earthquakes = [];
 
   String _appBarTitle = "Gempa Terbaru";
 
@@ -29,14 +31,29 @@ class _EarthquakeScreenState extends State<EarthquakeScreen> {
 
   // Mendapatkan data eartquakes sesuai pilihan user
 
-  void fetchEarthquake() {
+  Future<void> fetchEarthquake() async {
     if (_selectedEarthquakeEnum == EarthquakeEnum.gempaTerbaru) {
-      _earthquakes = EarthquakeService.getGempaBumiTerbaru();
+      _earthquakes =
+          await EarthquakeService.getGempaBumiTerbaru().whenComplete(() {
+        setState(() {
+          _isLoading = !_isLoading;
+        });
+      });
     } else if (_selectedEarthquakeEnum ==
         EarthquakeEnum.gempaMagnitudeDiAtasLima) {
-      _earthquakes = EarthquakeService.getGempaBumiMagnitudeDiAtasLima();
+      _earthquakes = await EarthquakeService.getGempaBumiMagnitudeDiAtasLima()
+          .whenComplete(() {
+        setState(() {
+          _isLoading = !_isLoading;
+        });
+      });
     } else if (_selectedEarthquakeEnum == EarthquakeEnum.gempaDirasakan) {
-      _earthquakes = EarthquakeService.getGempaBumiDirasakan();
+      _earthquakes =
+          await EarthquakeService.getGempaBumiDirasakan().whenComplete(() {
+        setState(() {
+          _isLoading = !_isLoading;
+        });
+      });
     }
   }
 
@@ -63,12 +80,14 @@ class _EarthquakeScreenState extends State<EarthquakeScreen> {
           PopupMenuButton<EarthquakeEnum>(
             onSelected: ((value) async {
               setState(() {
-                _selectedEarthquakeEnum = value;
+                _isLoading = !_isLoading;
 
-                fetchEarthquake();
+                _selectedEarthquakeEnum = value;
 
                 changeAppBarTitle();
               });
+
+              await fetchEarthquake();
             }),
             itemBuilder: ((context) {
               return [
@@ -91,34 +110,11 @@ class _EarthquakeScreenState extends State<EarthquakeScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: FutureBuilder(
-          future: _earthquakes,
-          builder: ((context, AsyncSnapshot<List<EarthquakeModel>> snapshot) {
-            if (snapshot.hasData) {
-              return ListView(
-                physics: const BouncingScrollPhysics(),
-                children: snapshot.data!.map((earthquake) {
-                  return Card(
-                    child: ExpansionTile(
-                      title: Text("Gempa M ${earthquake.magnitude}"),
-                      children: [
-                        EarthquakeDetailGridWidget(earthquake: earthquake),
-                      ],
-                    ),
-                  );
-                }).toList(),
-              );
-            } else if (snapshot.hasError) {
-              return const Center(
-                child: Text("Maaf, terjadi error"),
-              );
-            }
-
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }),
-        ),
+        child: _earthquakes.isNotEmpty
+            ? EarthquakeGridWidget(earthquakes: _earthquakes)
+            : const Center(
+                child: CircularProgressIndicator(),
+              ),
       ),
       drawer: const AppDrawerWidget(),
     );
