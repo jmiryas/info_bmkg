@@ -16,4 +16,4 @@ Berikut adalah fitur aplikasi ini:
 
 Berikut adalah demo dari aplikasi ini:
 
-![Demo Aplikasi](https://i.postimg.cc/9FZLDtjp/Animation4.gif)
+[![Animation4.gif](https://i.postimg.cc/9FZLDtjp/Animation4.gif)](https://postimg.cc/dLQ2XC3k)
