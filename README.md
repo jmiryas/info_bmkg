@@ -16,4 +16,4 @@ Berikut adalah fitur aplikasi ini:
 
 Berikut adalah demo dari aplikasi ini:
 
-![Demo Info BMKG](https://i.postimg.cc/9FZLDtjp/Animation4.gif)
+![Demo Aplikasi](https://i.postimg.cc/9FZLDtjp/Animation4.gif)
