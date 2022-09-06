@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:info_bmkg/locators/locator.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
+import '../locators/locator.dart';
 import '../providers/theme_provider.dart';
 import '../screens/main_menu_screen.dart';
 
